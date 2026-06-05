@@ -1,3 +1,2 @@
 # Projekt
-Projekt Python
-To do List
+Projekt Python na tema: To do List
