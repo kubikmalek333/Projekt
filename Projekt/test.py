@@ -5,9 +5,9 @@ import os
 
 FILE_NAME = "tasks.json"
 
-# =========================
-# load tasks
-# =========================
+
+# načtení tasku
+
 def load_tasks():
 
     if os.path.exists(FILE_NAME):
@@ -30,18 +30,17 @@ def load_tasks():
 
     return []
 
-# =========================
-# save tasks
-# =========================
+# uložení tasku
+
 def save_tasks():
 
     f = open(FILE_NAME, "w", encoding="utf-8")
     json.dump(tasks, f, ensure_ascii=False, indent=4)
     f.close()
 
-# =========================
+
 # refresh list
-# =========================
+
 def refresh():
 
     listbox.delete(0, tk.END)
@@ -60,9 +59,9 @@ def refresh():
 
     counter.config(text=f"Hotové: {done_count} / {len(tasks)}")
 
-# =========================
-# add task
-# =========================
+
+# přidání tasku
+
 def add_task():
 
     text = entry.get()
@@ -85,9 +84,9 @@ def add_task():
     else:
         messagebox.showwarning("Chyba", "Zadej úkol i čas")
 
-# =========================
-# delete task
-# =========================
+
+# smazání tasku
+
 def delete_task():
 
     try:
@@ -100,9 +99,9 @@ def delete_task():
     except:
         messagebox.showwarning("Chyba", "Nic není vybrané")
 
-# =========================
-# toggle done
-# =========================
+
+# za fajfkování
+
 def toggle_done():
 
     try:
@@ -115,9 +114,9 @@ def toggle_done():
     except:
         messagebox.showwarning("Chyba", "Vyber úkol")
 
-# =========================
-# clear all
-# =========================
+
+# smazání všech tasků
+
 def clear_all():
 
     if messagebox.askyesno("Otázka", "Smazat všechny úkoly?"):
@@ -126,18 +125,18 @@ def clear_all():
         save_tasks()
         refresh()
 
-# =========================
-# DARK THEME
-# =========================
+
+# Dark Mode
+
 BG = "#1e1e1e"
 FG = "white"
 ENTRY_BG = "#2d2d2d"
 BTN_BG = "#333333"
 LIST_BG = "#2d2d2d"
 
-# =========================
+
 # window
-# =========================
+
 root = tk.Tk()
 root.title("Úkolníček")
 root.geometry("650x600")
@@ -146,9 +145,9 @@ root.resizable(False, False)
 
 tasks = load_tasks()
 
-# =========================
+
 # UI TEXT
-# =========================
+
 title = tk.Label(root, text="Moje úkoly", font=("Arial", 20, "bold"), bg=BG, fg=FG)
 title.pack(pady=10)
 
@@ -164,9 +163,9 @@ time_label.pack()
 time_entry = tk.Entry(root, width=40, bg=ENTRY_BG, fg=FG, insertbackground=FG, relief="flat")
 time_entry.pack(pady=5)
 
-# =========================
+
 # BUTTONS (2 vedle sebe)
-# =========================
+
 row1 = tk.Frame(root, bg=BG)
 row1.pack(pady=3)
 
@@ -185,15 +184,14 @@ btn_del.pack(side="left", padx=5)
 btn_clear = tk.Button(row2, text="Vymazat vše", width=20, bg=BTN_BG, fg=FG, command=clear_all)
 btn_clear.pack(side="left", padx=5)
 
-# =========================
 # counter
-# =========================
+
 counter = tk.Label(root, text="Hotové: 0 / 0", bg=BG, fg=FG)
 counter.pack(pady=5)
 
-# =========================
+
 # listbox
-# =========================
+
 listbox = tk.Listbox(
     root,
     width=70,
@@ -207,8 +205,8 @@ listbox = tk.Listbox(
 )
 listbox.pack(pady=10)
 
-# =========================
+
 # start
-# =========================
+
 refresh()
 root.mainloop()
